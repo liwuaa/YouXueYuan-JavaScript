@@ -1,6 +1,6 @@
 # 优学院-YouXueYuan-JavaScript
 可用来看优学院视频而不用手动点击  
-Python程序版请到隔壁[https://github.com/Brush-JIM/YouXueYuan-JavaScript](https://github.com/Brush-JIM/YouXueYuan-JavaScript)
+Python程序版请到隔壁 [https://github.com/Brush-JIM/YouXueYuan-Python](https://github.com/Brush-JIM/YouXueYuan-Python)
 # 食用方法  
 * ① 脚本依赖油猴脚本实现  
     本人电脑环境：Windows10 x64 Enterprise，Google chrome 73.0.3683.86，Tampermonkey  
