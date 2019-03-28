@@ -1,15 +1,15 @@
 // ==UserScript==
 // @name         优学院看视频
 // @namespace    https://github.com/Brush-JIM/YouXueYuan-JavaScript
-// @version      0.1
+// @version      0.2
 // @description  js没学过，技术纯属渣渣。可用来看优学院视频而不用手动点击。
 // @author       Brush-JIM
 // @match        https://ua.ulearning.cn/learnCourse/learnCourse.html?courseId=*&chapterId=*
 // @grant        none
-// @run-at       document-end
+// @grant        unsafeWindow
+// @run-at       document-idle
 // @icon         https://www.ulearning.cn/ulearning/favicon.ico
 // ==/UserScript==
-
 (function() {
     'use strict';
     var elements = document.getElementsByClassName('operating-area')[0];
@@ -22,7 +22,7 @@
     //在原客服按钮增加上车按钮
     var div = document.createElement("div");
     div.setAttribute("class", "custom-service");
-    div.setAttribute("style", "z-index:9999");
+    div.setAttribute("style", "z-index:999999");
     div.innerHTML='<button class="btn-hollow" onclick="start_watch();"><span>上上上车~~~</span></button>';
     elements.appendChild(div);
     for (var i = 0;i <= 6;i++) {
@@ -43,7 +43,7 @@
         elements.removeChild(document.getElementsByClassName('custom-service')[0]);
         var div = document.createElement("div");
         div.setAttribute("class", "custom-service");
-        div.setAttribute("style", "z-index:9999");
+        div.setAttribute("style", "z-index:999999");
         div.innerHTML='<button class="btn-hollow" onclick="stop_watch();"><span>刹刹刹车~~~</span></button>';
         elements.appendChild(div);
         window.myVar = setInterval(function(){
@@ -68,12 +68,19 @@
                 }
             }
             console.log('下一页');
-            document.getElementsByClassName('next-page-btn cursor')[0].click();
+            window.koLearnCourseViewModel.goNextPage();
             for (var i = 0; i < document.querySelectorAll("[data-bind='text: $root.nextPageName()']").length; ++i) {
                 console.log(document.querySelectorAll("[data-bind='text: $root.nextPageName()']")[i].innerHTML);
                 if (document.querySelectorAll("[data-bind='text: $root.nextPageName()']")[i].innerHTML == "没有了") {
                     setTimeout(function(){
-                        document.getElementsByClassName("back-btn control-btn cursor")[0].click();
+                        try
+                        {
+                            window.koLearnCourseViewModel.goBack();
+                        }
+                        catch (error)
+                        {
+                            console.log(error);
+                        }
                     },3000);
                     clearInterval(window.myVar);
                     return (true);
@@ -116,10 +123,9 @@
         elements.removeChild(document.getElementsByClassName('custom-service')[0]);
         var div = document.createElement("div");
         div.setAttribute("class", "custom-service");
-        div.setAttribute("style", "z-index:9999");
+        div.setAttribute("style", "z-index:999999");
         div.innerHTML='<button class="btn-hollow" onclick="start_watch();"><span>上上上车~~~</span></button>';
         elements.appendChild(div);
         console.log('刹车成功');
     };
-    // Your code here...
 })();
